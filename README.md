@@ -79,3 +79,9 @@ npm run seed:citaclara
 # set CITACLARA_LIVE=https://citaclara.pages.dev
 # set CITACLARA_REPO=https://github.com/USER/citaclara
 ```
+
+---
+
+Este es mi portfolio personal. Lo uso para enviarlo a empresas y que puedan conocer mejor mi perfil, proyectos y formación (DAM).
+
+Web pública: https://ivanmartin.pages.dev/
