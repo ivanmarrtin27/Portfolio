@@ -1,0 +1,18 @@
+node_modules/
+.wrangler/
+.dev.vars
+.DS_Store
+*.log
+dist/
+.vercel/
+.cookies.txt
+.tmp-*.json
+
+# Herramientas / agentes locales (no subir)
+.cursor/
+.cursorignore
+AGENTS.md
+Memory.md
+agent-transcripts/
+.cursor/plans/
+*.canvas.tsx

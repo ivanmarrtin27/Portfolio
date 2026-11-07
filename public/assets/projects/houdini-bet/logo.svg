@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Houdini Analytics">
+  <rect width="512" height="512" fill="#0a0a0a"/>
+  <text x="256" y="270" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700">HOUDINI</text>
+  <text x="256" y="320" text-anchor="middle" fill="#e10600" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="6">ANALYTICS</text>
+</svg>

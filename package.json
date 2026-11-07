@@ -1,0 +1,16 @@
+{
+  "name": "portfolio-dam",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Portfolio DAM con panel de gestión (Cloudflare Pages + D1 + R2)",
+  "scripts": {
+    "dev": "wrangler pages dev public --r2=FILES --persist-to=.wrangler/state",
+    "db:migrate:local": "wrangler d1 migrations apply portfolio-dam-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply portfolio-dam-db --remote",
+    "deploy": "wrangler pages deploy public --project-name ivanmartin",
+    "seed:citaclara": "node scripts/seed-citaclara.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4.40.0"
+  }
+}

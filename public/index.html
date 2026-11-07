@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f14">
+  <meta name="description" content="Iván Martín Molina — estudiante de DAM (Desarrollo de Aplicaciones Multiplataforma). Apps, webs y proyectos de software.">
+  <link rel="canonical" href="https://ivanmartin.pages.dev/">
+  <link rel="alternate" hreflang="es" href="https://ivanmartin.pages.dev/?lang=es">
+  <link rel="alternate" hreflang="en" href="https://ivanmartin.pages.dev/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ivanmartin.pages.dev/">
+  <meta property="og:title" content="Iván Martín Molina · Estudiante DAM">
+  <meta property="og:description" content="Estudiante de DAM en España. Apps, webs y proyectos de software.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ivanmartin.pages.dev/">
+  <meta property="og:image" content="https://ivanmartin.pages.dev/assets/logo-im.png">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Iván Martín Molina · Estudiante DAM">
+  <meta name="twitter:description" content="Estudiante de DAM en España. Apps, webs y proyectos de software.">
+  <meta name="twitter:image" content="https://ivanmartin.pages.dev/assets/logo-im.png">
+  <title>Iván Martín Molina · Estudiante DAM</title>
+  <link rel="icon" href="/assets/logo-im.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/logo-im.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Iván Martín Molina",
+    "url": "https://ivanmartin.pages.dev/",
+    "email": "mailto:ivanmarrtin2703@gmail.com",
+    "jobTitle": "Multiplatform Application Development (DAM) student",
+    "sameAs": [
+      "https://github.com/ivanmarrtin27",
+      "https://www.linkedin.com/in/iván-martín-molina-34b652432/"
+    ],
+    "knowsAbout": ["Java", "JavaScript", "TypeScript", "Kotlin", "Android", "Web development", "SQL"]
+  }
+  </script>
+</head>
+<body class="page-ready">
+  <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar" id="scrollProgressBar"></div></div>
+  <div class="atmosphere" aria-hidden="true"></div>
+
+  <header class="site-header reveal is-visible">
+    <a class="brand" href="#top" data-i18n="brand">Iván Martín Molina</a>
+    <nav class="nav" aria-label="Principal" data-i18n-aria="nav.primary">
+      <a href="#about" data-i18n="nav.about">Sobre mí</a>
+      <a href="#projects" data-i18n="nav.projects">Proyectos</a>
+      <a href="#certificates" data-i18n="nav.certificates">Certificados</a>
+      <a href="#cv" data-i18n="nav.cv">CV</a>
+      <a href="#contact" data-i18n="nav.contact">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-toggle" role="group" aria-label="Idioma" data-i18n-aria="nav.language" data-lang="es">
+        <span class="lang-pill" aria-hidden="true"></span>
+        <button type="button" class="lang-btn is-active" data-lang="es">ES</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Menú" data-i18n-aria="nav.menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="hero-eyebrow" data-i18n="hero.eyebrow">DAM · Multiplataforma</p>
+      <h1 class="hero-name" id="heroName">Iván Martín Molina</h1>
+      <p class="hero-tagline" id="heroTagline"></p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#projects" data-i18n="hero.ctaProjects">Ver proyectos</a>
+        <a class="btn btn-ghost" id="heroCvBtn" href="#cv" data-i18n="hero.ctaCv">Descargar CV</a>
+        <a class="btn btn-ghost" href="#contact" data-i18n="hero.ctaContact">Contactar</a>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-head reveal">
+        <h2 data-i18n="about.title">Sobre mí</h2>
+        <p data-i18n="about.lead">Quién soy y qué construyo</p>
+      </div>
+      <div class="about-grid has-panel reveal" id="aboutGrid">
+        <div class="about-copy">
+          <div id="aboutText" class="about-text"></div>
+          <div class="skills-block" id="skillsBlock" aria-label="Skills">
+            <h3 class="skills-title" data-i18n="about.skillsTitle">Tecnologías</h3>
+            <dl class="skills-grid">
+              <div class="skills-cat">
+                <dt data-i18n="about.cat.frontend">Frontend</dt>
+                <dd class="about-stack" data-skills="about.skills.frontend"></dd>
+              </div>
+              <div class="skills-cat">
+                <dt data-i18n="about.cat.backend">Backend</dt>
+                <dd class="about-stack" data-skills="about.skills.backend"></dd>
+              </div>
+              <div class="skills-cat">
+                <dt data-i18n="about.cat.mobile">Móvil</dt>
+                <dd class="about-stack" data-skills="about.skills.mobile"></dd>
+              </div>
+              <div class="skills-cat">
+                <dt data-i18n="about.cat.data">Bases de datos</dt>
+                <dd class="about-stack" data-skills="about.skills.data"></dd>
+              </div>
+              <div class="skills-cat">
+                <dt data-i18n="about.cat.tools">Herramientas</dt>
+                <dd class="about-stack" data-skills="about.skills.tools"></dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+        <aside class="about-panel" id="aboutPanel" aria-hidden="false">
+          <div class="about-panel__glow" aria-hidden="true"></div>
+          <img class="about-panel__logo" src="/assets/logo-im.png" alt="Iván Martín Molina" width="480" height="480" decoding="async">
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-head reveal">
+        <h2 data-i18n="projects.title">Proyectos</h2>
+        <p data-i18n="projects.lead">Webs y aplicaciones que he construido y sigo mejorando.</p>
+      </div>
+      <div class="project-list" id="projectList"></div>
+      <p class="empty-state" id="projectsEmpty" hidden data-i18n="projects.empty">Pronto habrá proyectos aquí.</p>
+    </section>
+
+    <section class="section" id="certificates">
+      <div class="section-head reveal">
+        <h2 data-i18n="certificates.title">Certificados</h2>
+        <p data-i18n="certificates.lead">Formación y cursos que he completado.</p>
+      </div>
+      <div class="cert-list" id="certList"></div>
+      <p class="empty-state" id="certsEmpty" hidden data-i18n="certificates.empty">Aún no hay certificados publicados.</p>
+    </section>
+
+    <section class="section" id="cv">
+      <div class="section-head reveal">
+        <h2 data-i18n="cv.title">Currículum</h2>
+        <p data-i18n="cv.lead">Aquí tienes mi currículum en español o en inglés.</p>
+      </div>
+      <div class="cv-block reveal" id="cvBlock">
+        <a class="btn btn-primary cv-btn" href="/assets/cv/cv-es.pdf" target="_blank" rel="noopener" data-i18n="cv.es">CV · Español</a>
+        <a class="btn btn-primary cv-btn" href="/assets/cv/cv-en.pdf" target="_blank" rel="noopener" data-i18n="cv.en">CV · English</a>
+      </div>
+    </section>
+
+    <section class="section section-contact" id="contact">
+      <div class="section-head reveal">
+        <h2 data-i18n="contact.title">Contacto</h2>
+        <p data-i18n="contact.lead">¿Hablamos? Te respondo por email.</p>
+      </div>
+      <div class="contact-panel reveal" id="contactRow"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer reveal">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <p class="footer-name" id="footerName">Iván Martín Molina</p>
+      </div>
+      <nav class="footer-nav" aria-label="Secciones" data-i18n-aria="footer.navLabel">
+        <a href="#about" data-i18n="nav.about">Sobre mí</a>
+        <a href="#projects" data-i18n="nav.projects">Proyectos</a>
+        <a href="#certificates" data-i18n="nav.certificates">Certificados</a>
+        <a href="#cv" data-i18n="nav.cv">CV</a>
+        <a href="#contact" data-i18n="nav.contact">Contacto</a>
+      </nav>
+    </div>
+    <div class="footer-bar">
+      <p id="footerCopy"></p>
+    </div>
+  </footer>
+
+  <script src="/i18n.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

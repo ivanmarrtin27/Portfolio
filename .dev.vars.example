@@ -1,0 +1,3 @@
+# Copia este archivo a .dev.vars y ajusta los valores
+ADMIN_PIN=78239644
+SESSION_SECRET=cambia-este-secreto-largo-y-aleatorio

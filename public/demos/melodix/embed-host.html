@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Mediolix Embed Host</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+    #player {
+      width: 320px;
+      height: 180px;
+    }
+  </style>
+</head>
+<body>
+  <div id="player"></div>
+  <script>
+    /**
+     * Host Demus-like: IFrame Player API → HTML5 → audio del SO.
+     * Autoplay: arrancar SIEMPRE muted; unmute solo cuando ya está PLAYING.
+     */
+    var player = null;
+    var ready = false;
+    var progressTimer = null;
+    var currentMediaId = null;
+    var pendingId = null;
+    var pendingVolume = null;
+    var wantVolume = 100;
+    var unmuteTimer = null;
+    /** true mientras esperamos el primer PLAYING de un load (no desmutear aún) */
+    var mutedForAutoplay = false;
+
+    function post(type, data) {
+      var msg = { source: 'mediolix-embed', type: type, data: data == null ? null : data };
+      try {
+        parent.postMessage(msg, window.location.origin);
+      } catch (e) {}
+    }
+
+    function mapState(code) {
+      if (code === -1) return 'idle';
+      if (code === 0) return 'ended';
+      if (code === 1) return 'playing';
+      if (code === 2) return 'paused';
+      if (code === 3) return 'buffering';
+      if (code === 5) return 'loading';
+      return 'idle';
+    }
+
+    function startProgress() {
+      stopProgress();
+      progressTimer = setInterval(function () {
+        if (!player || typeof player.getCurrentTime !== 'function') return;
+        try {
+          post('progress', {
+            position: player.getCurrentTime() || 0,
+            duration: player.getDuration() || 0,
+            mediaId: currentMediaId,
+          });
+        } catch (e) {}
+      }, 400);
+    }
+
+    function stopProgress() {
+      if (progressTimer) {
+        clearInterval(progressTimer);
+        progressTimer = null;
+      }
+    }
+
+    function clearUnmuteTimer() {
+      if (unmuteTimer) {
+        clearTimeout(unmuteTimer);
+        unmuteTimer = null;
+      }
+    }
+
+    function applyWantedVolume() {
+      if (!player) return;
+      try {
+        player.setVolume(wantVolume);
+        if (wantVolume > 0) player.unMute();
+        else player.mute();
+      } catch (e) {}
+    }
+
+    /** Desmutear solo si el player ya está en PLAYING (1). */
+    function unmuteIfPlaying() {
+      if (!player) return;
+      try {
+        if (typeof player.getPlayerState === 'function' && player.getPlayerState() !== 1) {
+          return;
+        }
+      } catch (e) {
+        return;
+      }
+      mutedForAutoplay = false;
+      applyWantedVolume();
+    }
+
+    function patchPlayerIframeReferrer() {
+      try {
+        var iframe = player && player.getIframe && player.getIframe();
+        if (iframe) {
+          iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+          iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+        }
+      } catch (e) {}
+    }
+
+    function doLoad(mediaId, volume) {
+      if (!mediaId) return;
+      currentMediaId = String(mediaId);
+      stopProgress();
+      if (volume != null && volume !== '') {
+        var v = Number(volume);
+        if (Number.isFinite(v)) {
+          wantVolume = Math.max(0, Math.min(100, Math.round(v * 100)));
+        }
+      }
+      post('state', { state: 'loading', mediaId: currentMediaId });
+      if (!ready || !player || typeof player.loadVideoById !== 'function') {
+        pendingId = mediaId;
+        pendingVolume = volume;
+        return;
+      }
+      pendingId = null;
+      pendingVolume = null;
+      clearUnmuteTimer();
+      mutedForAutoplay = true;
+      try {
+        patchPlayerIframeReferrer();
+        // Mute obligatorio para autoplay tras awaits (gesto del usuario ya perdido)
+        player.mute();
+        player.loadVideoById({
+          videoId: String(mediaId),
+          startSeconds: 0,
+          suggestedQuality: 'medium',
+        });
+        player.playVideo();
+        // Backup suave: solo desmutear si YA está playing (evento perdido)
+        unmuteTimer = setTimeout(function () {
+          unmuteTimer = null;
+          unmuteIfPlaying();
+        }, 700);
+      } catch (e) {
+        mutedForAutoplay = false;
+        post('error', { code: -2, mediaId: currentMediaId });
+      }
+    }
+
+    function createPlayer() {
+      if (player) return;
+      var origin = window.location.origin;
+      player = new YT.Player('player', {
+        width: 320,
+        height: 180,
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          modestbranding: 1,
+          playsinline: 1,
+          rel: 0,
+          iv_load_policy: 3,
+          origin: origin,
+          widget_referrer: origin + '/',
+        },
+        events: {
+          onReady: function () {
+            ready = true;
+            patchPlayerIframeReferrer();
+            try { player.mute(); } catch (e) {}
+            post('ready', { ready: true });
+            if (pendingId) doLoad(pendingId, pendingVolume);
+          },
+          onStateChange: function (e) {
+            var state = mapState(e.data);
+            post('state', { state: state, raw: e.data, mediaId: currentMediaId });
+            if (state === 'playing') {
+              startProgress();
+              clearUnmuteTimer();
+              mutedForAutoplay = false;
+              applyWantedVolume();
+            } else if (state === 'paused' || state === 'ended' || state === 'idle') {
+              stopProgress();
+            }
+            // CUED: forzar play muted (sin unmute — rompería autoplay)
+            if (e.data === 5) {
+              try {
+                player.mute();
+                player.playVideo();
+              } catch (err) {}
+            }
+          },
+          onError: function (e) {
+            mutedForAutoplay = false;
+            clearUnmuteTimer();
+            stopProgress();
+            post('error', { code: e.data, mediaId: currentMediaId });
+            post('state', { state: 'error', mediaId: currentMediaId });
+          },
+        },
+      });
+      setTimeout(patchPlayerIframeReferrer, 0);
+      setTimeout(patchPlayerIframeReferrer, 300);
+    }
+
+    window.onYouTubeIframeAPIReady = function () {
+      createPlayer();
+    };
+
+    window.addEventListener('message', function (event) {
+      if (event.origin !== window.location.origin) return;
+      var msg = event.data;
+      if (!msg || msg.target !== 'mediolix-embed') return;
+      var cmd = msg.cmd;
+      var payload = msg.payload || {};
+
+      if (cmd === 'load') doLoad(payload.mediaId, payload.volume);
+      else if (cmd === 'play') {
+        try {
+          player && player.playVideo();
+          // Solo desmutear si ya está sonando o el load anterior ya pasó
+          if (!mutedForAutoplay) applyWantedVolume();
+          else unmuteIfPlaying();
+        } catch (e) {}
+      }
+      else if (cmd === 'pause') { try { player && player.pauseVideo(); } catch (e) {} }
+      else if (cmd === 'stop') {
+        clearUnmuteTimer();
+        mutedForAutoplay = false;
+        pendingId = null;
+        pendingVolume = null;
+        stopProgress();
+        try {
+          if (player) {
+            player.mute();
+            player.pauseVideo();
+            player.stopVideo();
+          }
+        } catch (e) {}
+        post('state', { state: 'idle' });
+      }
+      else if (cmd === 'seek') {
+        try { player && player.seekTo(Number(payload.seconds) || 0, true); } catch (e) {}
+      }
+      else if (cmd === 'volume') {
+        wantVolume = Math.max(0, Math.min(100, Math.round(Number(payload.volume) * 100)));
+        // No desmutear durante el handshake de autoplay del load
+        if (!mutedForAutoplay) applyWantedVolume();
+      }
+      else if (cmd === 'unlock') {
+        // Gesto del usuario en el padre: intentar sticky activation muted
+        try {
+          if (player && typeof player.playVideo === 'function') {
+            player.mute();
+            var st = typeof player.getPlayerState === 'function' ? player.getPlayerState() : -1;
+            if (st === 1 || st === 2 || st === 3 || st === 5) {
+              player.playVideo();
+            }
+          }
+        } catch (e) {}
+      }
+      else if (cmd === 'ping') post('pong', { ready: ready });
+    });
+
+    post('boot', null);
+
+    if (window.YT && window.YT.Player) {
+      createPlayer();
+    } else {
+      var tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      tag.referrerPolicy = 'strict-origin-when-cross-origin';
+      document.head.appendChild(tag);
+    }
+  </script>
+</body>
+</html>

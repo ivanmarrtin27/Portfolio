@@ -1,0 +1,1 @@
+import{t as e}from"./react-vendor-CVaUQXZF.js";import{T as t}from"./index-D2kF3TFy.js";var n=e(),r={sm:22,md:32,lg:56,xl:88};function i({className:e=``,size:i=`md`}){let a=typeof i==`number`?i:r[i]??r.md;return(0,n.jsx)(`div`,{className:`liked-playlist-cover${e?` ${e}`:``}`,children:(0,n.jsx)(t,{size:a,fill:`currentColor`,strokeWidth:1.5,"aria-hidden":!0})})}export{i as t};

@@ -1,0 +1,2 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/web-39z3-heC.js","assets/dist-BDdlKBnh.js"])))=>i.map(i=>d[i]);
+import{d as e}from"./router-DM1I266A.js";import{r as t}from"./dist-BDdlKBnh.js";var n=t(`App`,{web:()=>e(()=>import(`./web-39z3-heC.js`).then(e=>new e.AppWeb),__vite__mapDeps([0,1]))});export{n as App};

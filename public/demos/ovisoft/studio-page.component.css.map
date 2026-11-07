@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/features/studio/studio-page.component.scss"],
+  "sourcesContent": [".studio-shell {\r\n  width: 100%;\r\n}\r\n\r\n.studio-card {\r\n  background: linear-gradient(180deg, rgba(29, 11, 46, 0.94) 0%, rgba(22, 10, 34, 0.94) 100%);\r\n  border-radius: 20px;\r\n  border: 1px solid var(--border-mid);\r\n  overflow: hidden;\r\n  box-shadow: 0 30px 90px rgba(5, 2, 10, 0.72);\r\n}\r\n\r\n.layout {\r\n  display: grid;\r\n  grid-template-columns: 390px minmax(0, 1fr);\r\n  min-height: 680px;\r\n}\r\n\r\n@media (max-width: 680px) {\r\n  .layout {\r\n    grid-template-columns: 1fr;\r\n  }\r\n}\r\n"],
+  "mappings": ";AAAA,CAAA;AACE,SAAA;;AAGF,CAAA;AACE;IAAA;MAAA,MAAA;MAAA,KAAA,EAAA,EAAA,EAAA,EAAA,EAAA,EAAA,MAAA,EAAA;MAAA,KAAA,EAAA,EAAA,EAAA,EAAA,EAAA,EAAA,MAAA;AACA,iBAAA;AACA,UAAA,IAAA,MAAA,IAAA;AACA,YAAA;AACA,cAAA,EAAA,KAAA,KAAA,KAAA,CAAA,EAAA,CAAA,EAAA,EAAA,EAAA;;AAGF,CAAA;AACE,WAAA;AACA,yBAAA,MAAA,OAAA,CAAA,EAAA;AACA,cAAA;;AAGF,QAAA,WAAA;AACE,GAPF;AAQI,2BAAA;;;",
+  "names": []
+}

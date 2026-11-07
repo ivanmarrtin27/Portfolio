@@ -1,0 +1,15 @@
+{
+  "name": "ivanmartin",
+  "compatibility_date": "2026-10-06",
+  "pages_build_output_dir": "public",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "portfolio-dam-db",
+      "database_id": "85af9751-d190-4eda-8077-88806f5ca1b9",
+      "migrations_dir": "migrations"
+    }
+  ]
+  // R2: re-add when bucket portfolio-dam-files exists
+  // "r2_buckets": [{ "binding": "FILES", "bucket_name": "portfolio-dam-files" }]
+}
