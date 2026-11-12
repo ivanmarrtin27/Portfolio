@@ -6,7 +6,7 @@ Portfolio público (ES + toggle EN) + panel privado `/admin` con PIN, mismo patr
 
 | Entorno | URL | Qué incluye |
 |---------|-----|-------------|
-| **GitHub Pages** (espejo estático gratis) | https://ivanmarrtin27.github.io/portfolio/ | Solo la web pública (datos desde `public/data/portfolio.json`) |
+| **GitHub Pages** (espejo estático gratis) | https://ivanmarrtin27.github.io/Portfolio/ | Solo la web pública (datos desde `public/data/portfolio.json`) |
 | **Cloudflare Pages** (fuente de verdad) | https://ivanmartin.pages.dev/ | Pública + `/admin/` + `/api/*` + D1 |
 
 > El hosting gratis de GitHub es **`.github.io`**, no un dominio `.io` genérico.
@@ -66,7 +66,7 @@ URL: `https://ivanmartin.pages.dev/` · Admin: `https://ivanmartin.pages.dev/adm
 
 Al hacer push a `main`, el workflow `.github/workflows/github-pages.yml` publica `public/` en:
 
-**https://ivanmarrtin27.github.io/portfolio/**
+**https://ivanmarrtin27.github.io/Portfolio/**
 
 Para refrescar el contenido del espejo tras cambios en D1:
 
@@ -110,5 +110,5 @@ npm run seed:citaclara
 
 Este es mi portfolio personal. Lo uso para enviarlo a empresas y que puedan conocer mejor mi perfil, proyectos y formación (DAM).
 
-- Espejo GitHub Pages: https://ivanmarrtin27.github.io/portfolio/
+- Espejo GitHub Pages: https://ivanmarrtin27.github.io/Portfolio/
 - Completo (admin + API): https://ivanmartin.pages.dev/

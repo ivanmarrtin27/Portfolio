@@ -2,7 +2,8 @@
   function base() {
     try {
       const first = location.pathname.split('/').filter(Boolean)[0];
-      if (first === 'portfolio') return '/portfolio';
+      // Repo real: Portfolio (mayúscula); aceptar cualquier casing en la URL.
+      if (first && first.toLowerCase() === 'portfolio') return `/${first}`;
     } catch {
       /* ignore */
     }
