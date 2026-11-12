@@ -2,11 +2,21 @@
 
 Portfolio público (ES + toggle EN) + panel privado `/admin` con PIN, mismo patrón mental que QR Bares.
 
+## URLs públicas
+
+| Entorno | URL | Qué incluye |
+|---------|-----|-------------|
+| **GitHub Pages** (espejo estático gratis) | https://ivanmarrtin27.github.io/portfolio/ | Solo la web pública (datos desde `public/data/portfolio.json`) |
+| **Cloudflare Pages** (fuente de verdad) | https://ivanmartin.pages.dev/ | Pública + `/admin/` + `/api/*` + D1 |
+
+> El hosting gratis de GitHub es **`.github.io`**, no un dominio `.io` genérico.
+
+**Limitación honesta:** GitHub Pages solo sirve estáticos. El panel `/admin/`, el PIN y las APIs **no funcionan** ahí. Editar contenido = Cloudflare (`/admin/` + deploy) y, si quieres actualizar el espejo, refrescar `public/data/portfolio.json`.
+
 ## Stack
-- Cloudflare Pages (`public/`)
-- Pages Functions (`functions/`)
-- D1 (metadatos) + R2 (PDF/imágenes)
-- Auth: PIN + cookie HMAC
+- Cloudflare Pages (`public/`) + Pages Functions (`functions/`) + D1
+- Espejo estático en GitHub Pages (Actions → carpeta `public/`)
+- Auth (solo Cloudflare): PIN + cookie HMAC
 
 ## Arranque local
 
@@ -52,6 +62,22 @@ URL: `https://ivanmartin.pages.dev/` · Admin: `https://ivanmartin.pages.dev/adm
    - `PDF/qr-portfolio.html` (público — compartible)
    - `PDF/qr-admin.html` (privado — solo tuyo)
 
+## Deploy (GitHub Pages)
+
+Al hacer push a `main`, el workflow `.github/workflows/github-pages.yml` publica `public/` en:
+
+**https://ivanmarrtin27.github.io/portfolio/**
+
+Para refrescar el contenido del espejo tras cambios en D1:
+
+```bash
+# PowerShell
+Invoke-WebRequest https://ivanmartin.pages.dev/api/portfolio -OutFile public/data/portfolio.json
+git add public/data/portfolio.json
+git commit -m "Actualiza dump estático del portfolio"
+git push
+```
+
 ## Qué gestionar en el admin
 - Perfil / sobre mí / YouTube **unlisted**
 - Proyectos (CRUD + imagen)
@@ -63,7 +89,7 @@ URL: `https://ivanmartin.pages.dev/` · Admin: `https://ivanmartin.pages.dev/adm
 3. `npm run deploy`
 
 ## Emails
-Plantillas en `emails/` (cold EN/ES + follow-up). Solo enlaza la web pública.
+Plantillas en `emails/` (cold EN/ES + follow-up). Solo enlaza la web pública (Cloudflare o github.io).
 
 ## Proyecto destacado: CitaClara
 
@@ -84,4 +110,5 @@ npm run seed:citaclara
 
 Este es mi portfolio personal. Lo uso para enviarlo a empresas y que puedan conocer mejor mi perfil, proyectos y formación (DAM).
 
-Web pública: https://ivanmartin.pages.dev/
+- Espejo GitHub Pages: https://ivanmarrtin27.github.io/portfolio/
+- Completo (admin + API): https://ivanmartin.pages.dev/

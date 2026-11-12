@@ -1,6 +1,23 @@
 (() => {
   const i18n = window.PortfolioI18n;
+  const site = window.PortfolioSite || {
+    base: () => '',
+    url: (path) => path
+  };
   let data = { profile: null, projects: [], certificates: [] };
+
+  function siteUrl(path) {
+    return site.url(path);
+  }
+
+  /** Extensionless demo paths work on Cloudflare; GitHub Pages needs .html */
+  function demoPageUrl(path) {
+    const raw = String(path || '');
+    if (/\/demos\/qr-bares\/(mesa|encargado)\/?$/i.test(raw)) {
+      return siteUrl(raw.replace(/\/?$/, '.html'));
+    }
+    return siteUrl(raw);
+  }
 
   const els = {
     heroName: document.getElementById('heroName'),
@@ -35,8 +52,9 @@
     while ((match = re.exec(source))) {
       html += escapeHtml(source.slice(last, match.index));
       const url = match[0];
-      const href = escapeHtml(url);
-      html += `<a href="${href}" target="_blank" rel="noopener">${href}</a>`;
+      const resolved = url.startsWith('/demos/') ? demoPageUrl(url) : url;
+      const href = escapeHtml(resolved);
+      html += `<a href="${href}" target="_blank" rel="noopener">${escapeHtml(url)}</a>`;
       last = match.index + url.length;
     }
     html += escapeHtml(source.slice(last));
@@ -143,6 +161,9 @@
     }
     if (/\/assets\/projects\/citaclara\//i.test(String(url || '')) || /klaro-logo/i.test(String(url || ''))) {
       return 'project-logo--klaro';
+    }
+    if (/\/assets\/projects\/controlatusfinanzas\//i.test(String(url || ''))) {
+      return 'project-logo--ctf';
     }
     return '';
   }
@@ -342,7 +363,8 @@
       `;
       if (thumbUrl) {
         const thumbImg = toggle.querySelector('.project-thumb img');
-        thumbImg.src = `${thumbUrl}${thumbUrl.includes('?') ? '&' : '?'}v=4`;
+        const thumbSrc = siteUrl(thumbUrl);
+        thumbImg.src = `${thumbSrc}${thumbSrc.includes('?') ? '&' : '?'}v=4`;
         thumbImg.alt = title ? `Logo · ${title}` : '';
         const logoMod = projectLogoClass(thumbUrl);
         if (logoMod) thumbImg.classList.add(logoMod);
@@ -363,7 +385,7 @@
       if (project.live_url) {
         const a = document.createElement('a');
         a.className = 'btn btn-ghost';
-        a.href = project.live_url;
+        a.href = demoPageUrl(project.live_url);
         const isExternal = /^https?:\/\//i.test(project.live_url);
         if (isExternal) {
           a.target = '_blank';
@@ -438,13 +460,13 @@
           row.className = 'project-files';
           const mesa = document.createElement('a');
           mesa.className = 'btn btn-ghost';
-          mesa.href = '/demos/qr-bares/mesa';
+          mesa.href = demoPageUrl('/demos/qr-bares/mesa');
           mesa.target = '_blank';
           mesa.rel = 'noopener';
           mesa.textContent = i18n.t('projects.stickerTable');
           const enc = document.createElement('a');
           enc.className = 'btn btn-ghost';
-          enc.href = '/demos/qr-bares/encargado';
+          enc.href = demoPageUrl('/demos/qr-bares/encargado');
           enc.target = '_blank';
           enc.rel = 'noopener';
           enc.textContent = i18n.t('projects.stickerStaff');
@@ -466,12 +488,12 @@
           detailShots.forEach((shot) => {
             const isQr = /^QR\s/i.test(shot.label || '');
             const link = document.createElement('a');
-            link.href = shot.file_url;
+            link.href = siteUrl(shot.file_url);
             link.target = '_blank';
             link.rel = 'noopener';
             link.className = `project-shot${isQr ? ' project-shot--qr' : ''}`;
             const img = document.createElement('img');
-            img.src = shot.file_url;
+            img.src = siteUrl(shot.file_url);
             img.alt = shot.label || title;
             img.loading = 'lazy';
             link.appendChild(img);
@@ -497,7 +519,7 @@
           files.forEach((file) => {
             const a = document.createElement('a');
             a.className = 'btn btn-ghost';
-            a.href = file.file_url;
+            a.href = siteUrl(file.file_url);
             a.target = '_blank';
             a.rel = 'noopener';
             a.textContent = `${file.label || i18n.t('projects.download')}`;
@@ -554,7 +576,7 @@
       if (cert.file_url) {
         const a = document.createElement('a');
         a.className = 'btn btn-ghost';
-        a.href = cert.file_url;
+        a.href = siteUrl(cert.file_url);
         a.target = '_blank';
         a.rel = 'noopener';
         a.textContent = i18n.t('certificates.open');
@@ -702,11 +724,20 @@
   });
 
   async function load() {
-    try {
-      const res = await fetch('/api/portfolio', { headers: { Accept: 'application/json' } });
+    async function fetchJson(path) {
+      const res = await fetch(siteUrl(path), { headers: { Accept: 'application/json' } });
       if (!res.ok) throw new Error('Failed');
-      data = await res.json();
+      return res.json();
+    }
+
+    try {
+      // Cloudflare Pages Functions (fuente de verdad con D1).
+      data = await fetchJson('/api/portfolio');
     } catch {
+      try {
+        // Espejo estático para GitHub Pages (sin Functions/D1).
+        data = await fetchJson('/data/portfolio.json');
+      } catch {
       data = {
         profile: {
           name: 'Iván Martín Molina',
@@ -775,6 +806,25 @@
             image_url: '/assets/projects/citaclara/klaro-logo.png',
             assets: [],
             sort_order: 1
+          },
+          {
+            id: 'fallback-ctf',
+            title_es: 'ControlaTusFinanzas',
+            title_en: 'ControlaTusFinanzas',
+            description_es:
+              'App web de finanzas personales: cuentas, movimientos, presupuestos, objetivos, informes Excel/PDF y copia de seguridad JSON. Vite + React + Supabase.',
+            description_en:
+              'Personal finance web app: accounts, transactions, budgets, goals, Excel/PDF reports and JSON backup. Vite + React + Supabase.',
+            docs_es:
+              'ControlaTusFinanzas es mi app de finanzas personales en español: sin paywalls ni hogares compartidos.\n\nIncluye cuentas y saldos derivados, ingresos/gastos, transferencias, presupuestos, recurrentes, objetivos, deudas, etiquetas, plantillas, tickets en Storage, calendario/recordatorios e informes exportables.\n\nStack: Vite, React, TypeScript, Supabase (Auth + Postgres RLS + Storage) y Vercel.\nDemo en vivo: https://controlatusfinanzas.vercel.app\nCódigo: https://github.com/ivanmarrtin27/ControlaTusFinanzas',
+            docs_en:
+              'ControlaTusFinanzas is my personal finance app in Spanish: no paywalls and no shared households.\n\nIt covers accounts with derived balances, income/expense, transfers, budgets, recurring rules, goals, debts, tags, templates, receipt Storage, calendar/reminders and exportable reports.\n\nStack: Vite, React, TypeScript, Supabase (Auth + Postgres RLS + Storage) and Vercel.\nLive demo: https://controlatusfinanzas.vercel.app\nCode: https://github.com/ivanmarrtin27/ControlaTusFinanzas',
+            tech: 'Vite, React, TypeScript, Supabase, Vercel',
+            live_url: 'https://controlatusfinanzas.vercel.app',
+            repo_url: 'https://github.com/ivanmarrtin27/ControlaTusFinanzas',
+            image_url: '/assets/projects/controlatusfinanzas/logo.png',
+            assets: [],
+            sort_order: 5
           },
           {
             id: 'fallback-houdini',
@@ -946,6 +996,7 @@
           }
         ]
       };
+      }
     }
     render();
   }

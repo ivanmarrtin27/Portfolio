@@ -987,6 +987,19 @@ main {
   box-sizing: border-box;
 }
 
+/* ControlaTusFinanzas: icono oscuro con borde mint para no fundirse en el carbón */
+.project-thumb:has(img.project-logo--ctf) {
+  background: #05070a;
+  border-color: rgba(61, 214, 195, 0.4);
+}
+
+.project-thumb img.project-logo--ctf {
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.02);
+  transform-origin: center;
+}
+
 .cv-block {
   display: flex;
   flex-wrap: nowrap;
