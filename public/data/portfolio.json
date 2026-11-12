@@ -100,11 +100,11 @@
       "id": 3,
       "title_es": "Houdini Analytics v1.1",
       "title_en": "Houdini Analytics v1.1",
-      "description_es": "App de predicciones de fútbol (Houdini Analytics v1.1) con modelo Poisson: tips, probabilidades y cuotas orientativas para ligas top europeas. En desarrollo activo sobre Cloudflare (Worker + D1).",
-      "description_en": "Football predictions app (Houdini Analytics v1.1) with a Poisson model: tips, probabilities and indicative odds for top European leagues. Active development on Cloudflare (Worker + D1).",
-      "docs_es": "Versión: v1.1 (Houdini Analytics).\r\n\r\nEstado: en desarrollo (MVP usable en pages.dev).\r\n\r\nNota: la URL actual (.pages.dev / .dev) es temporal mientras desarrollo; más adelante tendrá dominio propio (.es o .com).\r\n\r\nStack: Cloudflare Workers, D1, UI HTML/CSS/JS (PWA), sync de fixtures/odds.\r\n\r\nFeatures: Partidos (hoy/live), Top 10 del día, Aciertos / Stats de tips, explorador de Ligas con clasificaciones.\r\n\r\nModelo: Poisson + mercados 1X2 / O-U / BTTS / extras; value cuando hay book. Los tips son orientativos; no garantizan acierto ni beneficio.\r\n\r\nRoadmap (cuando el producto esté completo):\r\n1) Registro + login\r\n2) Planes Premium con suscripción / pago\r\n3) Dominio propio (.es o .com) cuando el producto esté completo\r\n\r\nDemo: https://houdini-analytics.pages.dev\r\nCódigo: https://github.com/ivanmarrtin27/Houdini-Analytics-v1.1",
-      "docs_en": "Version: v1.1 (Houdini Analytics).\r\n\r\nStatus: in development (usable MVP on pages.dev).\r\n\r\nNote: the current .pages.dev / .dev URL is temporary during development; a proper .es or .com domain will come later.\r\n\r\nStack: Cloudflare Workers, D1, HTML/CSS/JS UI (PWA), fixture/odds sync.\r\n\r\nFeatures: Matches (today/live), daily Top 10, Hits / tip Stats, Leagues explorer with standings.\r\n\r\nModel: Poisson + 1X2 / O-U / BTTS / extras; value when book odds exist. Tips are indicative; they do not guarantee hits or profit.\r\n\r\nRoadmap (once the product is complete):\r\n1) Sign-up + login\r\n2) Premium plans with subscription / payment\r\n3) Custom domain (.es or .com) once the product is complete\r\n\r\nDemo: https://houdini-analytics.pages.dev\r\nCode: https://github.com/ivanmarrtin27/Houdini-Analytics-v1.1",
-      "tech": "Cloudflare Workers, D1, JavaScript, PWA",
+      "description_es": "Predicciones de fútbol con modelo Poisson: partidos, tips/Top 10, Aciertos y Premium. Cloudflare Pages + Worker + D1.",
+      "description_en": "Football predictions with a Poisson model: matches, tips/Top 10, hit tracking and Premium. Cloudflare Pages + Worker + D1.",
+      "docs_es": "Versión: v1.1 (Houdini Analytics).\r\n\r\nEstado: producto usable en pages.dev (auth + Premium activos).\r\n\r\nNota: la URL actual (.pages.dev) es temporal; más adelante dominio propio (.es o .com).\r\n\r\nStack: Cloudflare Pages, Worker, D1; UI HTML/CSS/JS (PWA); sync de fixtures/odds.\r\n\r\nFeatures: Partidos (hoy/live), Top 10 del día, Aciertos / Stats, explorador de Ligas, auth (registro/login/Google) y Premium (Stripe).\r\n\r\nModelo: Poisson + mercados tip (O/U, BTTS, DC, extras). Tips orientativos; no garantizan acierto ni beneficio.\r\n\r\nRoadmap:\r\n1) Dominio propio (.es o .com)\r\n\r\nDemo: https://houdini-analytics.pages.dev\r\nCódigo: https://github.com/ivanmarrtin27/Houdini-Analytics-v1.1",
+      "docs_en": "Version: v1.1 (Houdini Analytics).\r\n\r\nStatus: usable product on pages.dev (auth + Premium live).\r\n\r\nNote: the current .pages.dev URL is temporary; a proper .es or .com domain will come later.\r\n\r\nStack: Cloudflare Pages, Worker, D1; HTML/CSS/JS UI (PWA); fixture/odds sync.\r\n\r\nFeatures: Matches (today/live), daily Top 10, Hits / tip Stats, Leagues explorer, auth (sign-up/login/Google) and Premium (Stripe).\r\n\r\nModel: Poisson + tip markets (O/U, BTTS, DC, extras). Tips are indicative; they do not guarantee hits or profit.\r\n\r\nRoadmap:\r\n1) Custom domain (.es or .com)\r\n\r\nDemo: https://houdini-analytics.pages.dev\r\nCode: https://github.com/ivanmarrtin27/Houdini-Analytics-v1.1",
+      "tech": "Cloudflare Pages, Workers, D1, JavaScript, PWA",
       "live_url": "https://houdini-analytics.pages.dev",
       "repo_url": "https://github.com/ivanmarrtin27/Houdini-Analytics-v1.1",
       "image_key": "/assets/projects/houdini-bet/logo.png",
@@ -112,7 +112,7 @@
       "assets": [],
       "sort_order": 10,
       "created_at": "2026-10-06 22:13:42",
-      "updated_at": "2026-11-04 13:33:48"
+      "updated_at": "2026-11-12 13:30:00"
     },
     {
       "id": 4,
