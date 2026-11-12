@@ -1,24 +1,24 @@
 # Portfolio DAM — guía rápida
 
-Portfolio público (ES + toggle EN) + panel privado `/admin` con PIN, mismo patrón mental que QR Bares.
+Portfolio público bilingüe (ES + toggle EN) de Iván Martín Molina (estudiante DAM).
 
-## URLs públicas
+## URL pública (producción)
 
-| Entorno | URL | Qué incluye |
-|---------|-----|-------------|
-| **GitHub Pages** (espejo estático gratis) | https://ivanmarrtin27.github.io/Portfolio/ | Solo la web pública (datos desde `public/data/portfolio.json`) |
-| **Cloudflare Pages** (fuente de verdad) | https://ivanmartin.pages.dev/ | Pública + `/admin/` + `/api/*` + D1 |
+**https://ivanmarrtin27.github.io/Portfolio/**
+
+Hosting: GitHub Pages (carpeta `public/`). Datos desde `public/data/portfolio.json` (sin API).
 
 > El hosting gratis de GitHub es **`.github.io`**, no un dominio `.io` genérico.
 
-**Limitación honesta:** GitHub Pages solo sirve estáticos. El panel `/admin/`, el PIN y las APIs **no funcionan** ahí. Editar contenido = Cloudflare (`/admin/` + deploy) y, si quieres actualizar el espejo, refrescar `public/data/portfolio.json`.
+**Limitación:** GitHub Pages solo sirve estáticos. El panel `/admin/`, el PIN y las APIs no están online. Para editar contenido: actualiza `public/data/portfolio.json` (y assets) y haz push a `main`.
 
 ## Stack
-- Cloudflare Pages (`public/`) + Pages Functions (`functions/`) + D1
-- Espejo estático en GitHub Pages (Actions → carpeta `public/`)
-- Auth (solo Cloudflare): PIN + cookie HMAC
+- Frontend: HTML/CSS/JS vanilla (`public/`)
+- Datos públicos: `public/data/portfolio.json`
+- Deploy: GitHub Actions → GitHub Pages (`.github/workflows/github-pages.yml`)
+- Opcional local: Cloudflare Wrangler + D1 + `/admin/` para editar offline (`npm run dev`) — **no hay deploy Cloudflare**
 
-## Arranque local
+## Arranque local (opcional, con admin)
 
 ```bash
 npm install
@@ -32,83 +32,31 @@ npm run dev
 - Web: `http://127.0.0.1:8788/`
 - Admin: `http://127.0.0.1:8788/admin`
 
-## Deploy (Cloudflare)
-
-1. Crea D1 y R2 (o deja que Wrangler los aprovisione al ajustar IDs):
-
-```bash
-npx wrangler d1 create portfolio-dam-db
-npx wrangler r2 bucket create portfolio-dam-files
-```
-
-2. Pega el `database_id` real en `wrangler.jsonc`.
-3. Configura secrets en el proyecto Pages:
-
-```bash
-npx wrangler pages secret put ADMIN_PIN --project-name ivanmartin
-npx wrangler pages secret put SESSION_SECRET --project-name ivanmartin
-```
-
-4. Migra remoto y despliega:
-
-```bash
-npm run db:migrate:remote
-npx wrangler pages deploy public --project-name ivanmartin
-```
-
-URL: `https://ivanmartin.pages.dev/` · Admin: `https://ivanmartin.pages.dev/admin/`
-
-5. Actualiza URLs en `PDF/config.js` y genera los QR abriendo:
-   - `PDF/qr-portfolio.html` (público — compartible)
-   - `PDF/qr-admin.html` (privado — solo tuyo)
+Tras editar en admin local, exporta o copia el contenido a `public/data/portfolio.json` antes del push.
 
 ## Deploy (GitHub Pages)
 
-Al hacer push a `main`, el workflow `.github/workflows/github-pages.yml` publica `public/` en:
+Al hacer push a `main`, el workflow publica `public/` en:
 
 **https://ivanmarrtin27.github.io/Portfolio/**
 
-Para refrescar el contenido del espejo tras cambios en D1:
-
-```bash
-# PowerShell
-Invoke-WebRequest https://ivanmartin.pages.dev/api/portfolio -OutFile public/data/portfolio.json
-git add public/data/portfolio.json
-git commit -m "Actualiza dump estático del portfolio"
-git push
-```
-
-## Qué gestionar en el admin
+## Contenido
 - Perfil / sobre mí / YouTube **unlisted**
-- Proyectos (CRUD + imagen)
-- Certificados y CV: **archivos estáticos** en `public/assets/certificates/` y `public/assets/cv/` (sin R2 ni tarjeta). Pega la ruta `/assets/...` en el admin y despliega.
-
-## Archivos (sin R2)
-1. Copia el PDF/imagen a `public/assets/cv/` o `public/assets/certificates/`
-2. En `/admin/` guarda la ruta (ej. `/assets/cv/cv.pdf`)
-3. `npm run deploy`
+- Proyectos, certificados y CV en `public/data/portfolio.json` + `public/assets/`
+- CV / certificados: archivos en `public/assets/cv/` y `public/assets/certificates/` (rutas tipo `/assets/...`)
 
 ## Emails
-Plantillas en `emails/` (cold EN/ES + follow-up). Solo enlaza la web pública (Cloudflare o github.io).
+Plantillas en `emails/` (cold EN/ES + follow-up). Solo enlaza la web pública:
 
-## Proyecto destacado: CitaClara
+`https://ivanmarrtin27.github.io/Portfolio/`
 
-Producto propio (recepcionista WhatsApp + IA para peluquerías). Código en carpeta hermana `../IA WhatsApp`.
-
-- Demo portfolio: `/demos/citaclara/`
-- Logo: `/assets/projects/citaclara/logo.svg`
-- Seed en D1 (con portfolio en `npm run dev`):
-
-```bash
-npm run seed:citaclara
-# Opcional:
-# set CITACLARA_LIVE=https://citaclara.pages.dev
-# set CITACLARA_REPO=https://github.com/USER/citaclara
-```
+## QR
+Actualiza URLs en `PDF/config.js` y genera:
+- `PDF/qr-portfolio.html` (público — compartible)
+- `PDF/qr-admin.html` (solo local / personal; no hay admin online)
 
 ---
 
 Este es mi portfolio personal. Lo uso para enviarlo a empresas y que puedan conocer mejor mi perfil, proyectos y formación (DAM).
 
-- Espejo GitHub Pages: https://ivanmarrtin27.github.io/Portfolio/
-- Completo (admin + API): https://ivanmartin.pages.dev/
+**Web:** https://ivanmarrtin27.github.io/Portfolio/

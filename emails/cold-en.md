@@ -29,7 +29,7 @@ Best regards,
 
 ## Checklist before sending
 - [ ] Personalized first line with company/person name
-- [ ] Portfolio URL is the **public** site only (never `/admin`)
+- [ ] Portfolio URL is **https://ivanmarrtin27.github.io/Portfolio/** only (never `/admin`)
 - [ ] CV PDF uploaded and downloadable on the site
 - [ ] At least 1 project + 2 certificates visible
 - [ ] YouTube intro set to **Unlisted** (not Private)

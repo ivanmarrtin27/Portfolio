@@ -1,7 +1,7 @@
 ﻿/**
  * Seed / upsert ControlaTusFinanzas en el portfolio (D1 vía API admin).
  * Uso producción:
- *   set PORTFOLIO_BASE_URL=https://ivanmartin.pages.dev
+ *   set PORTFOLIO_BASE_URL=https://ivanmarrtin27.github.io/Portfolio
  *   node scripts/seed-controlatusfinanzas.js
  * Lee ADMIN_PIN de .dev.vars (no lo imprime).
  */

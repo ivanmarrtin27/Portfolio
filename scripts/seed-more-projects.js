@@ -94,7 +94,7 @@ const PROJECTS = [
       '',
       'Demo en vivo: https://houdini-analytics.pages.dev',
       'Código: https://github.com/ivanmarrtin27/Houdini-Analytics-v1.1',
-      'Portfolio: https://ivanmartin.pages.dev/'
+      'Portfolio: https://ivanmarrtin27.github.io/Portfolio/'
     ].join('\n'),
     docs_en: [
       'Version: v1.1 (Houdini Analytics).',
@@ -116,7 +116,7 @@ const PROJECTS = [
       '',
       'Live demo: https://houdini-analytics.pages.dev',
       'Code: https://github.com/ivanmarrtin27/Houdini-Analytics-v1.1',
-      'Portfolio: https://ivanmartin.pages.dev/'
+      'Portfolio: https://ivanmarrtin27.github.io/Portfolio/'
     ].join('\n'),
     tech: 'Cloudflare Workers, D1, JavaScript, PWA',
     live_url: 'https://houdini-analytics.pages.dev',

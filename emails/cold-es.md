@@ -29,6 +29,6 @@ Un saludo,
 
 ## Checklist
 - [ ] Personaliza empresa/persona
-- [ ] Solo el link **público** del portfolio (nunca `/admin`)
+- [ ] Solo **https://ivanmarrtin27.github.io/Portfolio/** (nunca `/admin`)
 - [ ] CV y proyectos visibles
 - [ ] Vídeo de YouTube en **sin listar**

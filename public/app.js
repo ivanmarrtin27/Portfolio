@@ -731,12 +731,12 @@
     }
 
     try {
-      // Cloudflare Pages Functions (fuente de verdad con D1).
-      data = await fetchJson('/api/portfolio');
+      // Fuente de verdad pública: JSON estático (GitHub Pages).
+      data = await fetchJson('/data/portfolio.json');
     } catch {
       try {
-        // Espejo estático para GitHub Pages (sin Functions/D1).
-        data = await fetchJson('/data/portfolio.json');
+        // Opcional en local con Wrangler + D1.
+        data = await fetchJson('/api/portfolio');
       } catch {
       data = {
         profile: {
