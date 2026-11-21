@@ -766,7 +766,7 @@
               'Own product for venues: guests scan the table QR to open the menu; staff manage dishes and availability from their panel.\n\nCustomer menu: https://mi-carta.pages.dev/?bar=lo-gueno\nStaff panel: https://mi-carta.pages.dev/admin.html?bar=lo-gueno\nStaff panel demo PIN: 9999\n\nQR sticker demos on this portfolio:\nTable QR: /demos/qr-bares/mesa\nStaff QR: /demos/qr-bares/encargado',
             tech: 'Cloudflare Pages, Functions, D1, HTML, CSS, JavaScript',
             live_url: 'https://mi-carta.pages.dev/?bar=lo-gueno',
-            repo_url: '',
+            repo_url: 'https://github.com/ivanmarrtin27/Gestor-Cartas-QR',
             image_url: '/assets/projects/qr-bares/logo.png',
             assets: [
               {
@@ -835,9 +835,9 @@
             description_en:
               'Football predictions with a Poisson model: matches, tips/Top 10, hit tracking and Premium. Cloudflare Pages + Worker + D1.',
             docs_es:
-              'Versión: v1.1 (Houdini Analytics).\n\nEstado: producto usable en pages.dev (auth + Premium activos).\n\nNota: la URL actual (.pages.dev) es temporal; más adelante dominio propio (.es o .com).\n\nStack: Cloudflare Pages, Worker, D1; UI HTML/CSS/JS (PWA); sync de fixtures/odds.\n\nFeatures: Partidos (hoy/live), Top 10 del día, Aciertos / Stats, explorador de Ligas, auth (registro/login/Google) y Premium (Stripe).\n\nModelo: Poisson + mercados tip (O/U, BTTS, DC, extras). Tips orientativos; no garantizan acierto ni beneficio.\n\nRoadmap:\n1) Dominio propio (.es o .com)\n\nDemo: https://houdini-analytics.pages.dev\nCódigo: https://github.com/ivanmarrtin27/Houdini-Analytics-v1.1',
+              'Versión: v1.1 (Houdini Analytics).\n\nEstado: producto usable en pages.dev (auth + Premium activos).\n\nNota: la URL actual (.pages.dev) es temporal; más adelante dominio propio (.es o .com).\n\nStack: Cloudflare Pages, Worker, D1; UI HTML/CSS/JS (PWA); sync de fixtures/odds.\n\nFeatures: Partidos (hoy/live), Top 10 del día, Aciertos / Stats, explorador de Ligas, auth (registro/login/Google) y Premium (Stripe).\n\nModelo: Poisson + mercados tip (O/U, BTTS, DC, extras). Tips orientativos; no garantizan acierto ni beneficio.\n\nRoadmap:\n1) Dominio propio (.es o .com)\n\nDemo: https://houdini-analytics.pages.dev\nCódigo (web): https://github.com/ivanmarrtin27/Houdini-Analytics-v1.1\nCLI / CMD: https://github.com/ivanmarrtin27/Houdini-Analytics-CMD',
             docs_en:
-              'Version: v1.1 (Houdini Analytics).\n\nStatus: usable product on pages.dev (auth + Premium live).\n\nNote: the current .pages.dev URL is temporary; a proper .es or .com domain will come later.\n\nStack: Cloudflare Pages, Worker, D1; HTML/CSS/JS UI (PWA); fixture/odds sync.\n\nFeatures: Matches (today/live), daily Top 10, Hits / tip Stats, Leagues explorer, auth (sign-up/login/Google) and Premium (Stripe).\n\nModel: Poisson + tip markets (O/U, BTTS, DC, extras). Tips are indicative; they do not guarantee hits or profit.\n\nRoadmap:\n1) Custom domain (.es or .com)\n\nDemo: https://houdini-analytics.pages.dev\nCode: https://github.com/ivanmarrtin27/Houdini-Analytics-v1.1',
+              'Version: v1.1 (Houdini Analytics).\n\nStatus: usable product on pages.dev (auth + Premium live).\n\nNote: the current .pages.dev URL is temporary; a proper .es or .com domain will come later.\n\nStack: Cloudflare Pages, Worker, D1; HTML/CSS/JS UI (PWA); fixture/odds sync.\n\nFeatures: Matches (today/live), daily Top 10, Hits / tip Stats, Leagues explorer, auth (sign-up/login/Google) and Premium (Stripe).\n\nModel: Poisson + tip markets (O/U, BTTS, DC, extras). Tips are indicative; they do not guarantee hits or profit.\n\nRoadmap:\n1) Custom domain (.es or .com)\n\nDemo: https://houdini-analytics.pages.dev\nCode (web): https://github.com/ivanmarrtin27/Houdini-Analytics-v1.1\nCLI / CMD: https://github.com/ivanmarrtin27/Houdini-Analytics-CMD',
             tech: 'Cloudflare Pages, Workers, D1, JavaScript, PWA',
             live_url: 'https://houdini-analytics.pages.dev',
             repo_url: 'https://github.com/ivanmarrtin27/Houdini-Analytics-v1.1',

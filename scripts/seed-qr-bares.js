@@ -125,7 +125,7 @@ async function main() {
     ].join('\n'),
     tech: 'Cloudflare Pages, Functions, D1, HTML, CSS, JavaScript',
     live_url: MENU_URL,
-    repo_url: '',
+    repo_url: 'https://github.com/ivanmarrtin27/Gestor-Cartas-QR',
     image_key: '/assets/projects/qr-bares/logo.png',
     sort_order: 0
   };
